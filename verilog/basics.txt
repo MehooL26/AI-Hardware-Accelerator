@@ -1,0 +1,20 @@
+Q. Why computers understand only binary numbers
+* 8 bits form -> 1 byte
+
+- the weights in python will be converted to binary or hexadecimal because fpga can read only these type of values.
+- 2's compliment is used to find negative value of a number.
+    2's compliment is great for signed arithmetic operations.
+
+- Q8.8 means we divide 16 bits into -> 8 integer part and 8 fraction part
+    for Q8.8 scale = 2^8 = 256
+
+- now the question might arise that why did we scale weights and biases by 256 in the initial phase if we wanted it back in decimal.
+So the simple answer is that fpga can only calculate in integers, so first we convert to fixed point integers by scaling them by 256.
+Then we bring it back to decimals just for our personal understandind and debugging.
+
+- after multiplying in MAC, we shift the product by 8 bits because 256 is multiplied 2 times.
+    since 256 = 2^8, so to divide we shift right.
+    and we use arithmetic shift to preserve the sign, if we use logical shift then zeroes will keep adding on left.
+
+- the hardware block has to take input of weights and biases in Q8.8, then multiply them, it gives a 32-bit product which is converted to 8 bits
+    by shifted right by 8 bits which gives the final output.
