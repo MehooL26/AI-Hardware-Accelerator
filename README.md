@@ -85,7 +85,7 @@ Hardware Conversion
 - Output classes: 10
 - Framework: TensorFlow / Keras
 
-# Fixed-Point Qunatization
+# Fixed-Point Quantization
 FPGA hardware does not efficiently support floating-point calculations.
 
 Therefore, all neural network parameters were converted from floating-point values into fixed-point integers.
