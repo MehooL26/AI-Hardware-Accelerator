@@ -68,15 +68,15 @@ Output Layer
 Predicted Digit (0-9)
 
 ## Training Pipeline
-MNIST Dataset
-↓
-Image Normalization
-↓
-Neural Network Training 
-↓
-Weight Extraction
-↓
-Hardware Conversion
+MNIST Dataset <br>
+↓<br>
+Image Normalization<br>
+↓<br>
+Neural Network Training <br>
+↓<br>
+Weight Extraction<br>
+↓<br>
+Hardware Conversion<br>
 
 ## Training Details
 - Dataset: MNIST handwritten digits
