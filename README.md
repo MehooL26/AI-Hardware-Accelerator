@@ -16,18 +16,18 @@ This project focuses on designing a custom **AI Hardware Accelerator** using **V
 
 The project follows a complete AI-tohardware design flow:
 
-AI Model Training
-↓
-Weight Extraction
-↓
-Fixed-Point Quantization
-↓
-Hardware Architecture Design
-↓
-RTL Implementation
-↓
-Simulation & Verification
-↓
+AI Model Training <br>
+↓<br>
+Weight Extraction<br>
+↓<br>
+Fixed-Point Quantization<br>
+↓<br>
+Hardware Architecture Design<br>
+↓<br>
+RTL Implementation<br>
+↓<br>
+Simulation & Verification<br>
+↓<br>
 FPGA Deployment
 
 The goal is to understand how high-level AI algorithms are transformed into low-level digital hardware architectures used in modern AI chips.
@@ -39,36 +39,36 @@ Instead of running inference through software, the neural network computation is
 
 The accelerator is designed using a bottom-up approach:
 
-Arithmetic Units
-↓
-Mac Engine
-↓
-Neuron
-↓
-Neural Network Layers
-↓
-Complete AI Accelerator
-↓
+Arithmetic Units<br>
+↓<br>
+Mac Engine<br>
+↓<br>
+Neuron<br>
+↓<br>
+Neural Network Layers<br>
+↓<br>
+Complete AI Accelerator<br>
+↓<br>
 FPGA Implementation
 
 # Neural Network Architecture
 The implemented neural network is a fully connected neural network trained on the MNIST dataset.
 
 Architecture:
-Input Layer
-784 Pixels
-↓
-Hidden Layer
-64 Neurons
-Activation : ReLU
-↓
-Output Layer
-10 Neurons
-↓
+Input Layer <br>
+784 Pixels<br>
+↓<br>
+Hidden Layer<br>
+64 Neurons<br>
+Activation : ReLU<br>
+↓<br>
+Output Layer<br>
+10 Neurons<br>
+↓<br>
 Predicted Digit (0-9)
 
 ## Training Pipeline
-MNIST Dataset <br>
+MNIST Dataset<br>
 ↓<br>
 Image Normalization<br>
 ↓<br>
@@ -76,7 +76,7 @@ Neural Network Training <br>
 ↓<br>
 Weight Extraction<br>
 ↓<br>
-Hardware Conversion<br>
+Hardware Conversion
 
 ## Training Details
 - Dataset: MNIST handwritten digits
@@ -131,7 +131,7 @@ The hardware accelerator is being developed using Verilog HDL.
 ## 1. Fixed-point Multiplier 
 A custom multiplier designed for Q8.8 fixed-point arithmetic.
 
-Function:
+Function:<br>
 Output = (Input A * Input B) >> 8
 
 Features:
