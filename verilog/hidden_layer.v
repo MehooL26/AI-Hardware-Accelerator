@@ -13,14 +13,22 @@ so we just need to read it as all weights are stored in order */
 module hidden_layer(
     input clk,reset,enable,
     input signed [15:0] pixel,
-    input signed [15:0] weights [0:63],
-    input signed [15:0] bias [0:63],
     output signed [31:0] neuron_out [0:63],
     output reg done
 );
 
 // PIXEL COUNTER
 reg [9:0] pixel_index;
+
+// WEIGHT MEMORY
+reg signed [15:0] weight_mem [0:50175];
+reg signed [15:0] biased_mem [0:63];
+
+//LOADING WEIGHTS AND BIASES FROM mem FILE
+initial begin
+    $readmemh("w1_fixed.mem",weight_mem);
+    $readmemh("b1_fixed.mem",biased_mem);
+end
 
 // COUNTER LOGIC
 always @(posedge clk) begin
@@ -34,7 +42,7 @@ always @(posedge clk) begin
             pixel_index <= pixel_index;
         end
         else begin
-            pixel_index = pixel_index + 1'b1;
+            pixel_index <= pixel_index + 1'b1;
             done <= 1'b0;
         end
     end
