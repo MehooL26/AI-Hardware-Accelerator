@@ -4,7 +4,7 @@ module neuron(
     input signed [15:0] a,
     input signed [15:0] b,
     input signed [15:0] bias,
-    output reg signed [31:0] neuron_out
+    output wire signed [31:0] neuron_out
 );
 
     wire signed [31:0] mac_out;

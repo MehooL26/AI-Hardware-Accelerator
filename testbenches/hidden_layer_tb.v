@@ -1,4 +1,4 @@
-`timescale 1ps/1ps
+`timescale 1ns/1ps
 module hidden_layer_tb;
 
 reg clk,reset,enable;
@@ -35,7 +35,7 @@ initial begin
     #1;
 
 for (i=0;i<64;i=i+1) begin
-    $display("Neuron %0d",i,neuron_out[i]);
+    $display("Neuron= %0d output=%0d",i,neuron_out[i]);
 end 
 
 $finish;
