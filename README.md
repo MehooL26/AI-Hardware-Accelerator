@@ -1,7 +1,7 @@
-# 🚀 AI Hardware Accelerator for Neural Network Inference 
+# AI Hardware Accelerator for Neural Network Inference 
 A custom FPGA-based AI accelerator designed to perform neural network inference using dedicated hardware logic. This project focuses on bridging the gap between **Artificial Intelligence algorithms and VLSI hardware design** by converting a trained neural network model into an optimized RTL implementation using **Verilog HDL**.
 
-# 📌 Introduction
+# Introduction
 AI models are traditionally executed on CPUs and GPUs using software frameworks such as TensorFlow and PyTorch. While these platforms provide flexibility, they introduce computational overhead and consume significant power for repetitive mathematical operations.
 
 Modern AI applications require specialized hardware architectures capable of performing neural network computations efficiently with low latency and high energy efficiency.
@@ -32,7 +32,7 @@ FPGA Deployment
 
 The goal is to understand how high-level AI algorithms are transformed into low-level digital hardware architectures used in modern AI chips.
 
-# 🎯 Project Objective
+# Project Objective
 The objective of this project is to build a hardware accelerator capable of performing handwritten digit classification using the MNIST dataset.
 
 Instead of running inference through software, the neural network computation is converted into dedicated hardware blocks implemented using Verilog.
