@@ -2,10 +2,10 @@
 module output_tb;
     reg clk,reset,enable;
     reg signed [31:0] hidden_output [0:63];
-    wire signed [31:0] output [0:9];
+    wire signed [31:0] outputs [0:9];
     wire done;
 
-    output_layer uut (clk,reset,enable,hidden_output,output,done);
+    output_layer uut (clk,reset,enable,hidden_output,outputs,done);
 
     initial begin
         clk = 0;
@@ -37,7 +37,7 @@ module output_tb;
         $display("OUTPUT LAYER TEST");
         $display("------------------------------------------");
         for (i = 0; i < 10; i = i + 1) begin
-            $display("Output neuron %0d = %0d", i, output[i]);
+            $display("Output neuron %0d = %0d", i, outputs[i]);
         end
         $display("------------------------------------------");
         $display("DONE = %b", done);

@@ -1,7 +1,7 @@
 module output_layer(
     input clk,reset,enable,
     input signed [31:0] hidden_output [0:63],
-    output signed [31:0] output [0:9],
+    output signed [31:0] outputs [0:9],
     output reg done
 );
 
@@ -20,16 +20,16 @@ end
 
 always @(posedge clk) begin
     if(reset) begin
-        pixel_index <= 6'd0;
+        hidden_index <= 6'd0;
         done <= 1'b0;
     end
     else if(enable) begin
-        if(pixel_index == 6'd63) begin
+        if(hidden_index == 6'd63) begin
             done <= 1'b1;
-            pixel_index <= pixel_index;
+            hidden_index <= hidden_index;
         end
         else begin
-            pixel_index <= pixel_index + 1'b1;
+            hidden_index <= hidden_index + 1'b1;
             done <= 1'b0;
         end
     end
@@ -50,7 +50,7 @@ endgenerate
 genvar i;
 generate
     for(i=0;i<10;i++) begin
-        output_mac inst(clk,reset,enable,hidden_output[hidden_index],weight_mem[i*64+pixel_index],output_accumulator[i]);
+        output_mac inst(clk,reset,enable,hidden_output[hidden_index],weight_mem[i*64+hidden_index],output_accumulator[i]);
     end
 endgenerate
 
@@ -61,7 +61,7 @@ generate
 
         assign bias_extended = {{16{biased_mem[j][15]}},biased_mem};
 
-        assign output[j] = output_accumulator[j] + bias_extended; 
+        assign outputs[j] = output_accumulator[j] + bias_extended; 
     end
 endgenerate
 
