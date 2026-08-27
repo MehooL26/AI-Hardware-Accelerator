@@ -39,7 +39,6 @@ always @(posedge clk) begin
     else if (enable) begin
         if(pixel_index == 10'd783) begin
             done <= 1'b1;
-            pixel_index <= pixel_index;
         end
         else begin
             pixel_index <= pixel_index + 1'b1;
@@ -54,8 +53,53 @@ genvar i;
 
 generate
     for (i = 0; i<64 ; i=i+1) begin
-        neuron neuron_inst(clk,reset,enable,pixel,weight_mem[pixel_index*64 + i],biased_mem[i],neuron_out[i]);
+        neuron neuron_inst(clk,reset,enable,pixel,weight_mem[pixel_index*64 + (63-i)],biased_mem[63-i],neuron_out[63-i]);
     end
 endgenerate
+
+// temp debugging
+always @(posedge clk) begin
+    if (enable) begin
+        if (pixel_index == 10'd0 ||
+            pixel_index == 10'd1 ||
+            pixel_index == 10'd2 ||
+            pixel_index == 10'd783) begin
+
+            $display("HIDDEN DEBUG: pixel_index=%0d pixel=%0d",
+                     pixel_index,
+                     pixel);
+        end
+    end
+end
+
+always @(posedge clk) begin
+    if (enable) begin
+        if (pixel_index < 10 || pixel_index > 780) begin
+            $display("index=%0d pixel=%0d weight[0]=%0d",
+                     pixel_index,
+                     pixel,
+                     weight_mem[pixel_index*64]);
+        end
+    end
+end
+
+always @(posedge clk) begin
+    if (enable) begin
+        if (pixel_index == 0 ||
+            pixel_index == 94 ||
+            pixel_index == 95 ||
+            pixel_index == 96 ||
+            pixel_index == 97 ||
+            pixel_index == 98 ||
+            pixel_index == 99 ||
+            pixel_index == 100) begin
+
+            $display("DEBUG index=%0d pixel=%0d weight_neuron0=%0d",
+                     pixel_index,
+                     pixel,
+                     weight_mem[pixel_index*64]);
+        end
+    end
+end
 
 endmodule

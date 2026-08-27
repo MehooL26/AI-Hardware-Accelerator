@@ -30,6 +30,19 @@ module ai_accelerator(
 
     argmax argmax_inst(clk,reset,argmax_enable,output_scores,prediction,argmax_done);
 
+    /* temp debug
+    always @(posedge clk) begin
+    $display("DEBUG time=%0t state=%0d start=%b hidden_done=%b output_done=%b argmax_done=%b",
+             $time,
+             state,
+             start,
+             hidden_done,
+             output_done,
+             argmax_done);
+end
+
+    */
+
     always @(posedge clk) begin
         if(reset) begin
             state <= IDLE;
