@@ -5,6 +5,8 @@ module ai_accelerator_tb;
     wire [3:0] prediction;
     wire done;
 
+    reg signed [15:0] image_mem [0:783];
+
     ai_accelerator dut(clk,reset,start,pixel,prediction,done);
 
     initial begin
@@ -14,6 +16,9 @@ module ai_accelerator_tb;
 
     integer i;
     initial begin
+
+        $readmemh("outputs/mem/test_image.mem",image_mem);
+
         reset = 1;
         start = 0;
         pixel = 16'sd0;
@@ -35,10 +40,55 @@ module ai_accelerator_tb;
         wait(done == 1'b1);
 
         #1;
-        $display("FULL AI ACCELERATOR TEST");
-        $display("Prediction = %0d", prediction);
-        $display("Done       = %b", done);
-        $display("AI ACCELERATOR TESTBENCH COMPLETED");
+        $display("------------------------------------------");
+
+        $display("REAL MNIST IMAGE TEST");
+
+        $display("------------------------------------------");
+
+        $display("Actual label = 2");
+
+        $display("Prediction    = %0d", prediction);
+
+        $display("Done          = %b", done);
+
+        $display("------------------------------------------");
+
+
+        // -----------------------------------------
+        // Display output scores
+        // -----------------------------------------
+
+        $display("OUTPUT LAYER SCORES");
+
+        for (i = 0; i < 10; i = i + 1) begin
+
+            $display("Output[%0d] = %0d",
+                     i,
+                     uut.output_scores[i]);
+
+        end
+
+        $display("------------------------------------------");
+
+
+        // -----------------------------------------
+        // Check prediction
+        // -----------------------------------------
+
+        if (prediction == 4'd2)
+
+            $display("PREDICTION MATCHES ACTUAL LABEL");
+
+        else
+
+            $display("PREDICTION DOES NOT MATCH ACTUAL LABEL");
+
+
+        $display("------------------------------------------");
+
         $finish;
+
     end
+
 endmodule

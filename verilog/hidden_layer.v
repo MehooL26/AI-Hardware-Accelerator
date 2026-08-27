@@ -26,8 +26,8 @@ reg signed [15:0] biased_mem [0:63];
 
 //LOADING WEIGHTS AND BIASES FROM mem FILE
 initial begin
-    $readmemh("w1_fixed.mem",weight_mem);
-    $readmemh("b1_fixed.mem",biased_mem);
+    $readmemh("outputs/mem/w1_fixed.mem", weight_mem);
+    $readmemh("outputs/mem/b1_fixed.mem", biased_mem);
 end
 
 // COUNTER LOGIC

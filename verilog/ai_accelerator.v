@@ -1,7 +1,8 @@
 module ai_accelerator(
-    input clk,reset,start,
+    input clk,reset,
+    input reg start,
     input signed[15:0] pixel,
-    output [3:0] predition,
+    output [3:0] prediction,
     output done
 );
 
@@ -25,9 +26,9 @@ module ai_accelerator(
 
     hidden_layer inst(clk,reset,hidden_enable,pixel,hidden_output,hidden_done);
 
-    output_layer inst(clk,reset,output_enable,hidden_output,output_scores,output_done);
+    output_layer output_layer_inst(clk,reset,output_enable,hidden_output,output_scores,output_done);
 
-    argmax inst(clk,reset,argmax_enable,output_scores,prediction,argmax_done);
+    argmax argmax_inst(clk,reset,argmax_enable,output_scores,prediction,argmax_done);
 
     always @(posedge clk) begin
         if(reset) begin
@@ -37,7 +38,7 @@ module ai_accelerator(
             case(state)
                 IDLE : begin
                     if(start)
-                        start <= HIDDEN; 
+                        state <= HIDDEN; 
                 end 
                 HIDDEN : begin
                     if(hidden_done)
@@ -56,9 +57,9 @@ module ai_accelerator(
     end
 
     always @(*) begin
-        hidden_enable = 1'b0
-        output_enable = 1'b0
-        argmax_enable = 1'b0
+        hidden_enable = 1'b0;
+        output_enable = 1'b0;
+        argmax_enable = 1'b0;
 
         case(state)
             HIDDEN:
