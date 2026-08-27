@@ -54,7 +54,7 @@ genvar i;
 
 generate
     for (i = 0; i<64 ; i=i+1) begin
-        neuron neuron_inst(clk,reset,enable,pixel,weight_mem[i*784+pixel_index],biased_mem[i],neuron_out[i]);
+        neuron neuron_inst(clk,reset,enable,pixel,weight_mem[pixel_index*64 + i],biased_mem[i],neuron_out[i]);
     end
 endgenerate
 

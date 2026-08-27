@@ -34,45 +34,33 @@ module ai_accelerator_tb;
 
     initial begin
 
-        // -----------------------------------------
-        // Load actual MNIST image
-        // -----------------------------------------
-
+        // Load MNIST image
         $readmemh("outputs/mem/test_image.mem", image_mem);
 
-        // -----------------------------------------
         // Initial values
-        // -----------------------------------------
-
         reset = 1;
         start = 0;
         pixel = 16'sd0;
 
-        // -----------------------------------------
         // Reset
-        // -----------------------------------------
-
         #10;
-
         reset = 0;
 
         // -----------------------------------------
-        // Start accelerator
+        // Start accelerator with first pixel
         // -----------------------------------------
 
         @(negedge clk);
 
-        start = 1;
-
-        // First actual MNIST pixel
         pixel = image_mem[0];
+        start = 1;
 
         @(negedge clk);
 
         start = 0;
 
         // -----------------------------------------
-        // Send remaining 783 pixels
+        // Send remaining pixels
         // -----------------------------------------
 
         for (i = 1; i < 784; i = i + 1) begin
@@ -84,7 +72,7 @@ module ai_accelerator_tb;
         end
 
         // -----------------------------------------
-        // Wait for completion
+        // Wait for accelerator
         // -----------------------------------------
 
         wait(done == 1'b1);
@@ -92,7 +80,7 @@ module ai_accelerator_tb;
         #1;
 
         // -----------------------------------------
-        // Final prediction
+        // Display prediction
         // -----------------------------------------
 
         $display("------------------------------------------");
@@ -105,53 +93,43 @@ module ai_accelerator_tb;
 
         $display("------------------------------------------");
 
-
         // -----------------------------------------
-        // Hidden layer outputs
+        // Hidden layer
         // -----------------------------------------
 
         $display("HIDDEN LAYER OUTPUTS");
         $display("------------------------------------------");
 
         for (i = 0; i < 64; i = i + 1) begin
-
             $display("Hidden[%0d] = %0d",
                      i,
                      dut.hidden_output[i]);
-
         end
 
         $display("------------------------------------------");
 
-
         // -----------------------------------------
-        // Output layer scores
+        // Output layer
         // -----------------------------------------
 
         $display("OUTPUT LAYER SCORES");
         $display("------------------------------------------");
 
         for (i = 0; i < 10; i = i + 1) begin
-
             $display("Output[%0d] = %0d",
                      i,
                      dut.output_scores[i]);
-
         end
 
         $display("------------------------------------------");
-
 
         // -----------------------------------------
         // Check prediction
         // -----------------------------------------
 
         if (prediction == 4'd2)
-
             $display("PREDICTION MATCHES ACTUAL LABEL");
-
         else
-
             $display("PREDICTION DOES NOT MATCH ACTUAL LABEL");
 
         $display("------------------------------------------");
