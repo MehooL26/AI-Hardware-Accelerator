@@ -8,6 +8,6 @@ module output_multiplier(
     wire signed [47:0] scaled_product;
 
     assign full_product = a*b;
-    assign scaled_product = full_product >> 8;
-    assign result = scaled_product [15:0];
+    assign scaled_product = full_product >>> 8;
+    assign result = scaled_product [31:0];
 endmodule

@@ -14,8 +14,8 @@ reg signed [15:0] weight_mem [0:639];
 reg signed [15:0] biased_mem [0:9];
 
 initial begin
-    $readmemh("w2_fixed.mem",weight_mem);
-    $readmemh("b2_fixed.mem",biased_mem);
+    $readmemh("outputs/mem/w2_fixed.mem",weight_mem);
+    $readmemh("outputs/mem/b2_fixed.mem",biased_mem);
 end
 
 always @(posedge clk) begin
