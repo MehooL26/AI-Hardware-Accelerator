@@ -59,7 +59,7 @@ generate
     for(j=0;j<10;j++) begin
         wire signed [31:0] bias_extended;
 
-        assign bias_extended = {{16{biased_mem[j][15]}},biased_mem};
+        assign bias_extended = {{16{biased_mem[j][15]}},biased_mem[j]};
 
         assign outputs[j] = output_accumulator[j] + bias_extended; 
     end

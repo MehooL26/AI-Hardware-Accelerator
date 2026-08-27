@@ -2,7 +2,7 @@ module output_mac(
     input clk,reset,enable,
     input signed [31:0] a,
     input signed [15:0] b,
-    output reg signed [31:0] output_mac_accumlator
+    output reg signed [31:0] output_mac_accumulator
 );
 
 wire signed [31:0] product;
