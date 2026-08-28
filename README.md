@@ -14,7 +14,7 @@ This project focuses on designing a custom **AI Hardware Accelerator** using **V
 - Activation functions
 - Layer computation
 
-The project follows a complete AI-tohardware design flow:
+The project follows a complete AI to hardware design flow:
 
 AI Model Training <br>
 ↓<br>
