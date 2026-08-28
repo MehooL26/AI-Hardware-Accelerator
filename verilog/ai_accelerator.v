@@ -1,3 +1,14 @@
+/*
+    so in this file we are connecting the whole verilog phase by calling the hidden layer, output layer and argmax layer.
+    I am taking 16 bit pixel of the input image,
+    and prediction is 4 bits as it will show numbers from 0-9.
+
+    I am introducing 4 states -> IDLE, HIDDEN, OUTPUT and ARGMAX to control which module to call first,
+    according to my design the sequence will be IDLE->HIDDEN->OUTPUT->ARGMAX
+    and any change will be updated on the next positive edge of clock
+
+    Then if reset=1, 
+*/
 module ai_accelerator(
     input clk,reset,
     input reg start,
@@ -30,19 +41,11 @@ module ai_accelerator(
 
     argmax argmax_inst(clk,reset,argmax_enable,output_scores,prediction,argmax_done);
 
-    /* temp debug
-    always @(posedge clk) begin
-    $display("DEBUG time=%0t state=%0d start=%b hidden_done=%b output_done=%b argmax_done=%b",
-             $time,
-             state,
-             start,
-             hidden_done,
-             output_done,
-             argmax_done);
-end
-
-    */
-
+/*
+    I am introducing 4 states -> IDLE, HIDDEN, OUTPUT and ARGMAX to control which module to call first,
+    according to my design the sequence will be IDLE->HIDDEN->OUTPUT->ARGMAX
+    and any change will be updated on the next positive edge of clock
+*/
     always @(posedge clk) begin
         if(reset) begin
             state <= IDLE;
@@ -69,6 +72,12 @@ end
         end
     end
 
+/*
+    whenever state changes, this block will re-evaluate the enable signals,
+    so the state will be turned on based on value of state, consider it like a 
+    on-off switch for each module
+*/
+
     always @(*) begin
         hidden_enable = 1'b0;
         output_enable = 1'b0;
@@ -89,5 +98,6 @@ end
         endcase
     end
 
+// in the end argmax_done signal is sent to stop the operaration
     assign done = argmax_done;
 endmodule

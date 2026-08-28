@@ -24,7 +24,7 @@ always @(posedge clk) begin
         done <= 1'b0;
     end
     else if(enable) begin
-        if(hidden_index == 6'd63) begin
+        if(hidden_index == 6'd64) begin
             done <= 1'b1;
             hidden_index <= hidden_index;
         end
@@ -49,14 +49,14 @@ endgenerate
 
 genvar i;
 generate
-    for(i=0;i<10;i++) begin
+    for(i=0;i<10;i=i+1) begin
         output_mac inst(clk,reset,enable,hidden_output[hidden_index],weight_mem[i*64+hidden_index],output_accumulator[i]);
     end
 endgenerate
 
 genvar j;
 generate
-    for(j=0;j<10;j++) begin
+    for(j=0;j<10;j=j+1) begin
         wire signed [31:0] bias_extended;
 
         assign bias_extended = {{16{biased_mem[j][15]}},biased_mem[j]};
