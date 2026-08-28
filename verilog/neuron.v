@@ -1,4 +1,6 @@
-// this block performs only addition of bias and applies relu so we can use a combinational logic here.
+/*  This block performs only addition of bias and applies ReLU so we can use a combinational logic here.
+    The bias is extended in order to get more accurate results than 16 bit
+*/
 module neuron(
     input clk,reset,enable,
     input signed [15:0] a,
@@ -15,5 +17,5 @@ module neuron(
 
     assign bias_extended = {{16{bias[15]}},bias};
     assign biased_sum = mac_out + bias_extended;
-    assign neuron_out = biased_sum[31] ? 32'd0 : biased_sum;
+    assign neuron_out = biased_sum[31] ? 32'd0 : biased_sum;       // ReLU
 endmodule

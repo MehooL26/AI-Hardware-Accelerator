@@ -1,3 +1,5 @@
+// This module selects the largest value among the output neurons and gives the prediction
+
 module argmax(
     input clk,reset,enable,
     input signed [31:0] outputs [0:9],
