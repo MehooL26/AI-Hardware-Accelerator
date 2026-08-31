@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 module argmax_tb;
     reg clk,reset,enable;
-    reg signed [31:0] outputs [0:9];
+    reg [319:0] outputs;
     wire [3:0] prediction;
     wire done;
 
@@ -19,22 +19,22 @@ module argmax_tb;
         enable = 0;
 
         for(i=0;i<10;i=i+1) begin
-            outputs[i] = 32'sd0;
+            outputs[i*32 +: 32] = 32'sd0;
         end
         #10;
         reset = 0;
 
         @(negedge clk);
-        outputs[0] = 100;
-        outputs[1] = 250;
-        outputs[2] = 80;
-        outputs[3] = 900;
-        outputs[4] = 150;
-        outputs[5] = 50;
-        outputs[6] = 300;
-        outputs[7] = 400;
-        outputs[8] = 200;
-        outputs[9] = 100;
+        outputs[0*32 +: 32] = 100;
+        outputs[1*32 +: 32] = 250;
+        outputs[2*32 +: 32] = 80;
+        outputs[3*32 +: 32] = 900;
+        outputs[4*32 +: 32] = 150;
+        outputs[5*32 +: 32] = 50;
+        outputs[6*32 +: 32] = 300;
+        outputs[7*32 +: 32] = 400;
+        outputs[8*32 +: 32] = 200;
+        outputs[9*32 +: 32] = 100;
 
         enable = 1;
 

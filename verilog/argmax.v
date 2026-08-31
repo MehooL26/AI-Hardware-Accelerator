@@ -2,13 +2,17 @@
 
 module argmax(
     input clk,reset,enable,
-    input signed [31:0] outputs [0:9],
+    // Packed bus: score i occupies outputs[i*32 +: 32].
+    input [319:0] outputs,
     output reg [3:0] prediction,
     output reg done
 );
 
     reg [3:0] index;
     reg signed [31:0] max_value;
+    wire signed [31:0] current_value;
+
+    assign current_value = outputs[index*32 +: 32];
 
     always @(posedge clk) begin
         if(reset) begin
@@ -20,14 +24,14 @@ module argmax(
 
         else if(enable) begin
             if(index == 4'd0) begin
-                max_value <= outputs[0];
+                max_value <= outputs[0 +: 32];
                 prediction <= 4'd0;
                 index <= 4'd1;
                 done <= 1'b0;
             end
             else if(index < 4'd10) begin
-                if(outputs[index] > max_value) begin
-                    max_value <= outputs[index];
+                if(current_value > max_value) begin
+                    max_value <= current_value;
                     prediction <= index;
                 end
                 if (index == 4'd9) begin

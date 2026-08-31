@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 module output_tb;
     reg clk,reset,enable;
-    reg signed [31:0] hidden_output [0:63];
-    wire signed [31:0] outputs [0:9];
+    reg [2047:0] hidden_output;
+    wire [319:0] outputs;
     wire done;
 
     output_layer uut (clk,reset,enable,hidden_output,outputs,done);
@@ -16,8 +16,8 @@ module output_tb;
     initial begin
         reset = 1;
         enable = 0;
-        for(i=0;i<64;i++) begin
-            hidden_output[i] = 32'sd0;
+        for(i=0;i<64;i=i+1) begin
+            hidden_output[i*32 +: 32] = 32'sd0;
         end
         #10;
         reset = 0;
@@ -25,7 +25,7 @@ module output_tb;
         @(negedge clk);
         enable = 1;
         for(i=0;i<64;i=i+1) begin
-            hidden_output[i] = 32'sd256;
+            hidden_output[i*32 +: 32] = 32'sd256;
         end
         for (i = 0; i < 64; i = i + 1) begin
             @(posedge clk);
@@ -37,7 +37,7 @@ module output_tb;
         $display("OUTPUT LAYER TEST");
         $display("------------------------------------------");
         for (i = 0; i < 10; i = i + 1) begin
-            $display("Output neuron %0d = %0d", i, outputs[i]);
+            $display("Output neuron %0d = %0d", i, $signed(outputs[i*32 +: 32]));
         end
         $display("------------------------------------------");
         $display("DONE = %b", done);
