@@ -26,7 +26,7 @@ module ai_accelerator(
     reg argmax_enable;
 
     // Sub-module Instantiations using positional binding
-    hidden_layer inst (
+    hidden_layer hidden_layer_inst (
         clk,
         reset,
         hidden_enable,
@@ -58,7 +58,8 @@ module ai_accelerator(
         if (reset) begin
             state <= IDLE;
             done  <= 1'b0;
-        end else begin
+        end 
+        else begin
             case (state)
                 IDLE: begin
                     done <= 1'b0;

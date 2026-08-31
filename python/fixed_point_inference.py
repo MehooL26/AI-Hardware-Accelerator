@@ -27,8 +27,8 @@ the image is normalized and then in the next section the weight are converted in
 x_test = x_test.astype("float32")/255.0
 x_test = x_test.reshape(-1, 784)
 
-test_image = x_test[1]
-actual_label = y_test[1]
+test_image = x_test[8]
+actual_label = y_test[8]
 
 # ====================================================================
 #   CONVERTING TEST IMAGE INTO FIXED-POINT 
@@ -125,6 +125,9 @@ for i in range(NUM_TEST_IMAGES):
 
     if predicted_digit == actual_label:
         correct += 1
+
+    print("image",i, "predicted digit: ", predicted_digit)
+    print("actual digit: ", actual_label)
 
 fixed_point_accuracy = correct / NUM_TEST_IMAGES
 

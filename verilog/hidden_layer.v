@@ -65,7 +65,7 @@ module hidden_layer(
     genvar i;
     generate
         for (i = 0; i<64 ; i=i+1) begin
-            neuron neuron_inst(clk,reset,enable,pixel,weight_mem[784*i + pixel_index],biased_mem[i],hidden_out[i]);
+            neuron neuron_inst(clk,reset,enable,pixel,weight_mem[64*pixel_index + i],biased_mem[i],hidden_out[i]);
         end
     endgenerate
 endmodule

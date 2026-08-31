@@ -10,7 +10,7 @@ module output_layer(
     output reg done
 );
 
-    reg [5:0] hidden_index;
+    reg [6:0] hidden_index;
     wire signed [31:0] output_accumulator [0:9];
 
 // the weights and biases for output neurons are extracted
@@ -30,11 +30,11 @@ module output_layer(
 
     always @(posedge clk) begin
         if(reset) begin
-            hidden_index <= 6'd0;
+            hidden_index <= 7'd0;
             done <= 1'b0;
         end
         else if(enable) begin
-            if(hidden_index == 6'd64) begin
+            if(hidden_index == 7'd63) begin
                 done <= 1'b1;
                 hidden_index <= hidden_index;
             end
@@ -48,7 +48,7 @@ module output_layer(
     genvar i;
     generate
         for(i=0;i<10;i=i+1) begin
-            output_mac inst(clk,reset,enable,hidden_output[hidden_index],weight_mem[i*64+hidden_index],output_accumulator[i]);
+            output_mac inst(clk,reset,enable,hidden_output[hidden_index],weight_mem[10 * hidden_index + i],output_accumulator[i]);
         end
     endgenerate
 
