@@ -2,9 +2,7 @@
 A custom FPGA-based AI accelerator designed to perform neural network inference using dedicated hardware logic. This project focuses on bridging the gap between **Artificial Intelligence algorithms and VLSI hardware design** by converting a trained neural network model into an optimized RTL implementation using **Verilog HDL**.
 
 # Introduction
-AI models are traditionally executed on CPUs and GPUs using software frameworks such as TensorFlow and PyTorch. While these platforms provide flexibility, they introduce computational overhead and consume significant power for repetitive mathematical operations.
-
-Modern AI applications require specialized hardware architectures capable of performing neural network computations efficiently with low latency and high energy efficiency.
+A Verilog-based neural network accelerator for MNIST inference, designed from a trained TensorFlow model and implemented using fixed-point arithmetic.
 
 This project focuses on designing a custom **AI Hardware Accelerator** using **Verilog HDL and FPGA technology**. The accelerator implements the mathematical operations required for neural network inference, including:
 
@@ -29,6 +27,8 @@ RTL Implementation<br>
 Simulation & Verification<br>
 ↓<br>
 FPGA Deployment
+
+[python] [TensorFlow] [Verilog] [Vivado] [MNIST]
 
 The goal is to understand how high-level AI algorithms are transformed into low-level digital hardware architectures used in modern AI chips.
 
@@ -127,46 +127,6 @@ The hardware accelerator is being developed using Verilog HDL.
 - Xilinx Vivado
 - FPGA
 
-# Completed RTL Modules
-## 1. Fixed-point Multiplier 
-A custom multiplier designed for Q8.8 fixed-point arithmetic.
-
-Function:<br>
-Output = (Input A * Input B) >> 8
-
-Features:
-- 16-bit signed inputs 
-- Fixed-point scaling
-- Synthesizable RTL
-
-## 2. Multiply-Accumulate (MAC) Unit
-The MAC unit is the fundamental computational block of neural network hardware.
-
-Operation:
-Accumulator = Previous Value + (Input * Weight)
-
-Architecture:
-Input
-|
-|
-Multiplier
-|
-|
-Adder
-|
-|
-Accumulator
-
-Features:
-- Clocked Simulation
-- Reset Support
-- Enable control
-- Signed arithmetic
-
-Verification:
-✅ Testbench created
-✅ Simulation completed
-
 # Future Improvement
 possible improvements:
 
@@ -199,4 +159,4 @@ This project demonstrates practical experience in:
 - Implementation
 - Hardware acceleration
 
-This project is actively under development and aims to implement a complete neural netowrk accelerator on FPGA hardware.
+This project is actively under development and aims to implement a complete neural network accelerator on FPGA hardware.
