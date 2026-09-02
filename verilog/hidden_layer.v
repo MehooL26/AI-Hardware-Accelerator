@@ -20,7 +20,9 @@ so we just need to read it as all weights are stored in order */
 module hidden_layer(
     input clk,reset,enable,
     input signed [15:0] pixel,
-    output signed [31:0] hidden_out [0:63],
+    // Packed bus: neuron i occupies hidden_out[i*32 +: 32].
+    // A packed bus is supported by Verilog-2001; an unpacked array port is not.
+    output [2047:0] hidden_out,
     output reg done
 );
 
@@ -65,7 +67,7 @@ module hidden_layer(
     genvar i;
     generate
         for (i = 0; i<64 ; i=i+1) begin
-            neuron neuron_inst(clk,reset,enable,pixel,weight_mem[64*pixel_index + i],biased_mem[i],hidden_out[i]);
+            neuron neuron_inst(clk,reset,enable,pixel,weight_mem[64*pixel_index + i],biased_mem[i],hidden_out[i*32 +: 32]);
         end
     endgenerate
 endmodule

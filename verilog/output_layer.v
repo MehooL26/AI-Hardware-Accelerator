@@ -5,13 +5,14 @@
 */
 module output_layer(
     input clk,reset,enable,
-    input signed [31:0] hidden_output [0:63],
-    output signed [31:0] outputs [0:9],
+    // Packed buses: element i occupies bus[i*32 +: 32].
+    input [2047:0] hidden_output,
+    output [319:0] outputs,
     output reg done
 );
 
     reg [6:0] hidden_index;
-    wire signed [31:0] output_accumulator [0:9];
+    wire signed [319:0] output_accumulator;
 
 // the weights and biases for output neurons are extracted
     reg signed [15:0] weight_mem [0:639];
@@ -48,7 +49,7 @@ module output_layer(
     genvar i;
     generate
         for(i=0;i<10;i=i+1) begin
-            output_mac inst(clk,reset,enable,hidden_output[hidden_index],weight_mem[10 * hidden_index + i],output_accumulator[i]);
+            output_mac inst(clk,reset,enable,hidden_output[hidden_index*32 +: 32],weight_mem[10 * hidden_index + i],output_accumulator[i*32 +: 32]);
         end
     endgenerate
 
@@ -60,7 +61,7 @@ module output_layer(
 
             assign bias_extended = {{16{biased_mem[j][15]}},biased_mem[j]};
 
-            assign outputs[j] = output_accumulator[j] + bias_extended; 
+            assign outputs[j*32 +: 32] = output_accumulator[j*32 +: 32] + bias_extended;
         end
     endgenerate
 

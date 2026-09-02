@@ -14,11 +14,11 @@ module ai_accelerator(
 
     reg [1:0] state;
 
-    wire signed [31:0] hidden_output [0:63];
+    wire [2047:0] hidden_output;
     wire hidden_done;
     reg hidden_enable;
 
-    wire signed [31:0] output_scores [0:9];
+    wire [319:0] output_scores;
     wire output_done;
     reg output_enable;
 

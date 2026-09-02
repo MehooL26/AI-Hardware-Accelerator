@@ -30,8 +30,14 @@ module accuracy_tb;
 
     initial begin
 
-        $readmemh("outputs/mem/test_1000_images.mem", image_mem);
-        $readmemh("outputs/mem/test_1000_labels.mem", label_mem);
+        $readmemh(
+            "C:/Users/Aindril/Documents/daddy/AI-Hardware-Accelerator/outputs/mem/test_1000_images.mem",
+            image_mem
+        );
+        $readmemh(
+            "C:/Users/Aindril/Documents/daddy/AI-Hardware-Accelerator/outputs/mem/test_1000_labels.mem",
+            label_mem
+        );
 
         clk     = 0;
         reset   = 1;
@@ -62,10 +68,14 @@ module accuracy_tb;
             //--------------------------------
             @(negedge clk);
             pixel = image_mem[img * 784];
-            start = 1;
+            start = 1'b1;
 
+            @(posedge clk);      // accelerator samples start = 1
+            #1;
+            start = 1'b0;
+
+            // Keep pixel 0 stable until the hidden layer consumes it.
             @(posedge clk);
-            start = 0;
 
             //--------------------------------
             // REMAINING 783 PIXELS
@@ -83,18 +93,18 @@ module accuracy_tb;
             //--------------------------------
             // WAIT FOR DONE
             //--------------------------------
-            fork
-                begin
-                    wait(done == 1'b1);
-                end
-                begin
-                    #50000;
-                    $display("TIMEOUT ON IMAGE %0d", img);
-                    $finish;
-                end
-            join_any
+            fork : WAIT_OR_TIMEOUT
+    begin
+        wait (done == 1'b1);
+        disable WAIT_OR_TIMEOUT;
+    end
 
-            disable fork;
+    begin
+        #50000;
+        $display("TIMEOUT ON IMAGE %0d", img);
+        $finish;
+    end
+join
 
             #1;
 
@@ -127,7 +137,7 @@ module accuracy_tb;
         $display("Correct = %0d / 1000", correct);
         $display("Accuracy = %0.2f%%", correct * 10.0);
         $display("------------------------------------------");
-
+        
         $finish;
 
     end

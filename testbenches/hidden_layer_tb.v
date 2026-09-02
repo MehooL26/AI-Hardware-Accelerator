@@ -4,7 +4,7 @@ module hidden_layer_tb;
 reg clk,reset,enable;
 reg signed [15:0] pixel;
 
-wire signed [31:0] neuron_out [0:63];
+wire [2047:0] neuron_out;
 wire done;
 
 hidden_layer uut (clk,reset,enable,pixel,neuron_out,done);
@@ -35,7 +35,7 @@ initial begin
     #1;
 
 for (i=0;i<64;i=i+1) begin
-    $display("Neuron= %0d output=%0d",i,neuron_out[i]);
+    $display("Neuron= %0d output=%0d",i,$signed(neuron_out[i*32 +: 32]));
 end 
 
 $finish;
