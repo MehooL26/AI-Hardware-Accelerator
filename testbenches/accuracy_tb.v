@@ -31,11 +31,11 @@ module accuracy_tb;
     initial begin
 
         $readmemh(
-            "C:/Users/Aindril/Documents/daddy/AI-Hardware-Accelerator/outputs/mem/test_1000_images.mem",
+            "outputs/mem/test_1000_images.mem",
             image_mem
         );
         $readmemh(
-            "C:/Users/Aindril/Documents/daddy/AI-Hardware-Accelerator/outputs/mem/test_1000_labels.mem",
+            "outputs/mem/test_1000_labels.mem",
             label_mem
         );
 
