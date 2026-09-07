@@ -131,6 +131,61 @@ The neural network accelerator is implemented in **Verilog HDL** for FPGA deploy
 | Inference Latency | — |
 | Throughput | — |
 
+## How to Run
+
+### Python Pipeline
+
+From the project root:
+
+```bash
+python python/train.py
+python python/evaluate.py
+python python/export_weights.py
+python python/quantize.py
+python python/generate_mem.py
+```
+
+### Fixed-Point Inference
+
+```bash
+python python/fixed_point_inference.py
+```
+
+Current Q8.8 fixed-point accuracy: **97.3% on 1,000 MNIST test images.**
+
+### Test Data Generation
+
+For a single-image RTL test:
+
+```bash
+python python/generate_test_image.py
+```
+
+For multi-image accuracy testing:
+
+```bash
+python python/generate_test_data.py
+```
+
+### Verilog Simulation
+
+Compile the RTL and testbench using Icarus Verilog:
+
+```bash
+iverilog -g2012 -o output_sim verilog/*.v testbenches/ai_accelerator_tb.v
+```
+
+Run the simulation:
+
+```bash
+vvp output_sim
+```
+
+### FPGA Implementation
+
+The RTL design can be imported into **Xilinx Vivado** for synthesis and implementation. Resource utilization, timing, frequency, and power results will be added after FPGA analysis.
+
+
 # Future Improvements
 
 - Parallel MAC architecture
