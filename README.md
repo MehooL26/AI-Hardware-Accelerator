@@ -20,42 +20,24 @@ A Verilog-based neural network accelerator for MNIST inference, developed from a
 # Fixed-Point Quantization
 Neural network weights and biases were converted to **16-bit Q8.8 fixed-point format** for hardware implementation.
 
-## Format Used
 ### Q8.8 Fixed Point
-Total Bits : 16, integer -> 8 bits, fraction -> 8 bits
+**16-bit signed:** 8-bit integer + 8-bit fraction
+**Conversion:** `Hardware Value = Float × 256`
 
-Conversion: 
-Hardware Value = Floating Point Value * 256
-
-The converted weights and biases were stored as 16-bit signed integers.
-
-# Hardware Weight Generation
-The trained model parameters were exported into memory initialization files.
-
-These files will later be loaded into FPGA memory blocks.
-
-# Python Hardware Simulator 
-Before implementing the design in Verilog, a Python-based hardware simulator was created to verify the fixed-point behavior.
-
-Implemented: 
-- Fixed-point multiplication 
-- MAC operation
-- Neuron computation
-- Layer execution
-
+# Python Hardware Simulator
+A Python-based simulator was developed to verify fixed-point hardware behavior before Verilog implementation.
+**Implemented:** Fixed-Point Multiplication · MAC · Neuron · Layer Execution
 The simulator verified that the quantized hardware representation maintained model accuracy.
 
 ## Result
 Fixed-point inference accuracy:
-= 97.3%
+`= 97.3%`
 
 # RTL Hardware Design
-The hardware accelerator is being developed using Verilog HDL.
+The neural network accelerator is implemented in **Verilog HDL** for FPGA deployment.
 
 ## Tools Used
-- Verilog HDL
-- Xilinx Vivado
-- FPGA
+**Verilog HDL · Xilinx Vivado · FPGA**
 
 # Future Improvement
 possible improvements:
