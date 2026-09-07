@@ -133,6 +133,41 @@ The neural network accelerator is implemented in **Verilog HDL** for FPGA deploy
 
 ## How to Run
 
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/MehooL26/AI-Hardware-Accelerator.git
+cd AI-Hardware-Accelerator
+```
+
+### 2. Set Up the Python Environment
+
+Create a virtual environment:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate it:
+
+**macOS / Linux**
+
+```bash
+source .venv/bin/activate
+```
+
+**Windows**
+
+```bash
+.venv\Scripts\activate
+```
+
+Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
 ### Python Pipeline
 
 From the project root:
