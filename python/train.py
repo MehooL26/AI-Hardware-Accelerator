@@ -141,5 +141,6 @@ history = model.fit(
 
 MODEL_DIR = Path("outputs/model")
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
-model.save(MODEL_DIR/"mnist_dense_model.keras")  
+
+model.save(MODEL_DIR/"mnist_dense_model.keras")  #saving complete model for making changes in future
 

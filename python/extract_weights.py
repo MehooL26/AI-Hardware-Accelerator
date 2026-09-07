@@ -15,13 +15,13 @@ w2, b2 = model.layers[1].get_weights()   #extracting weights from layer 2, i.e. 
 '''these 4 variables contain all the learning data of the model, now if we delete the dataset,
 it will still be able to give the right predictions'''
 
-print("----shapes of extracted weights and biases----")
+'''print("----shapes of extracted weights and biases----")
 print(w1.shape)     #output : (784,64) every neuron has 784 weights and there are 64 neurons
 print(b1.shape)     #output : (64,) one neuron has 1 bias 
 print(w2.shape)     #output : (64,10) 64 inputs and 10 outputs
 print(b2.shape)     #output : (10,) 10 bias for 10 neurons
 
-print(w1[:10, 0])
+print(w1[:10, 0])'''
 
 WEIGHTS_DIR = Path("outputs/weights")
 WEIGHTS_DIR.mkdir(parents=True, exist_ok=True)

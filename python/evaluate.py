@@ -1,3 +1,5 @@
+#this file is used to create 'n' number of images for testing accuracy of python pipeline
+
 import numpy as np
 from pathlib import Path
 from tensorflow.keras.datasets import mnist
