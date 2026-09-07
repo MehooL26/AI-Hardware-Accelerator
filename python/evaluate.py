@@ -7,10 +7,12 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-with open (OUTPUT_DIR / "test_images.mem","w") as images_file,\
-     open (OUTPUT_DIR / "test_labels.mem","w") as labels_file:
+NUM_IMAGES = 1000
 
-    for i in range(10):
+with open (OUTPUT_DIR / f"test_{NUM_IMAGES}_images.mem","w") as images_file,\
+     open (OUTPUT_DIR / f"test_{NUM_IMAGES}_labels.mem","w") as labels_file:
+
+    for i in range(NUM_IMAGES):
         test_image = x_test[i]
         actual_label = y_test[i]
         test_image = test_image.astype("float32") / 255.0

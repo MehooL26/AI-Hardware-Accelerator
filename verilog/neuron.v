@@ -1,4 +1,5 @@
-/*  This block performs only addition of bias and applies ReLU so we can use a combinational logic here.
+/*  
+    This block performs only addition of bias and applies ReLU so we can use a combinational logic here.
     The bias is extended in order to get more accurate results than 16 bit
 */
 module neuron(
