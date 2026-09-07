@@ -17,8 +17,11 @@ A Verilog-based neural network accelerator for MNIST inference, developed from a
 AI-Hardware-Accelerator/
 │
 ├── python/
-│   ├── train_model.py
-│   ├── quantize_weights.py
+│   ├── train.py
+│   ├── extract_weights.py
+│   ├── quantize.py
+│   ├── generate_mem.py
+│   ├── evaluate.py
 │   ├── fixed_point_inference.py
 │   └── generate_test_image.py
 │
@@ -44,7 +47,8 @@ AI-Hardware-Accelerator/
 │   └── mem/
 │
 ├── README.md
-└── .gitignore
+├── requirements.txt
+├── .gitignore 
 ```
 
 
