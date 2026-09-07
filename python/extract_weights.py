@@ -2,9 +2,8 @@ import numpy as np
 from pathlib import Path
 from tensorflow import keras
 
-MODEL_DIR = Path("outputs/model")
-MODEL_DIR.mkdir(parents=True, exist_ok=True)
-model = keras.models.load_model(MODEL_DIR) 
+MODEL_PATH = Path("outputs/model/mnist_dense_model.keras")
+model = keras.models.load_model(MODEL_PATH)
 
 '''weights are basically a quantity that defines which factor is the most important
 
