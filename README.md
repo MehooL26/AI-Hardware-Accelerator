@@ -47,16 +47,6 @@ AI-Hardware-Accelerator/
 └── .gitignore
 ```
 
-**`python/`** — Model training, quantization, fixed-point inference, and test-data generation.
-
-**`verilog/`** — RTL implementation of the accelerator, including MAC units, neurons, layers, and control logic.
-
-**`testbenches/`** — Simulation and verification of the hardware modules.
-
-**`outputs/`** — Trained model, extracted weights, and `.mem` files used by the hardware.
-
-**`README.md`** — Project documentation.
-
 
 # Neural Network Architecture
 
@@ -94,6 +84,48 @@ The neural network accelerator is implemented in **Verilog HDL** for FPGA deploy
 ## Tools Used
 
 **Verilog HDL · Xilinx Vivado · FPGA**
+
+# Verification & Results
+
+## 1. Python Fixed-Point Inference
+
+| Test | Images Tested | Accuracy | Status |
+|------|---------------|----------|--------|
+| Fixed-Point Inference | 1000 | 97.3% | ✅ |
+| Test 2 | — | — | — |
+| Test 3 | — | — | — |
+
+## 2. Verilog Module Verification
+
+| Module | Test Cases | Passed | Failed | Status |
+|--------|------------|--------|--------|--------|
+| Fixed-Point Multiplier | — | — | — | — |
+| MAC Unit | — | — | — | — |
+| Neuron | — | — | — | — |
+| Hidden Layer | — | — | — | — |
+| Output Layer | — | — | — | — |
+| Argmax | — | — | — | — |
+
+## 3. End-to-End Accelerator
+
+| Test | Images Tested | Correct Predictions | Accuracy | Status |
+|------|---------------|---------------------|----------|--------|
+| MNIST Test Set | — | — | — | — |
+| 1000 Image Test | — | — | — | — |
+
+## 4. FPGA Results
+
+| Parameter | Result |
+|-----------|--------|
+| FPGA Board | — |
+| Clock Frequency | — |
+| LUTs | — |
+| Flip-Flops | — |
+| BRAM | — |
+| DSPs | — |
+| Power | — |
+| Inference Latency | — |
+| Throughput | — |
 
 # Future Improvements
 
