@@ -11,6 +11,53 @@ A Verilog-based neural network accelerator for MNIST inference, developed from a
 **Hardware Flow:**  
 **Arithmetic Units → MAC Engine → Neuron → Neural Network Layers → AI Accelerator → FPGA**
 
+## Repository Structure
+
+```text
+AI-Hardware-Accelerator/
+│
+├── python/
+│   ├── train_model.py
+│   ├── quantize_weights.py
+│   ├── fixed_point_inference.py
+│   └── generate_test_image.py
+│
+├── verilog/
+│   ├── fixed_point_multiplier.v
+│   ├── mac_unit.v
+│   ├── neuron.v
+│   ├── hidden_layer.v
+│   ├── output_multiplier.v
+│   ├── output_mac.v
+│   ├── output_layer.v
+│   ├── argmax.v
+│   └── ai_accelerator.v
+│
+├── testbenches/
+│   ├── mac_tb.v
+│   ├── hidden_layer_tb.v
+│   └── ai_accelerator_tb.v
+│
+├── outputs/
+│   ├── model/
+│   ├── weights/
+│   └── mem/
+│
+├── README.md
+└── .gitignore
+```
+
+**`python/`** — Model training, quantization, fixed-point inference, and test-data generation.
+
+**`verilog/`** — RTL implementation of the accelerator, including MAC units, neurons, layers, and control logic.
+
+**`testbenches/`** — Simulation and verification of the hardware modules.
+
+**`outputs/`** — Trained model, extracted weights, and `.mem` files used by the hardware.
+
+**`README.md`** — Project documentation.
+
+
 # Neural Network Architecture
 
 **MNIST → 784 Inputs → 64 Hidden (ReLU) → 10 Outputs → Digit (0–9)**
